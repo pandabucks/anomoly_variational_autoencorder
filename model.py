@@ -86,4 +86,3 @@ class VAEModel:
         # by default, random_normal has mean=0 and std=1.0
         epsilon = K.random_normal(shape=(batch, dim))
         return z_mean + K.exp(0.5 * z_log_var) * epsilon
-
