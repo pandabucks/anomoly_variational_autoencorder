@@ -36,7 +36,6 @@ def cut_img(x, number, height=8, width=8):
  
 # データセットの読み込み
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
-#(x_train, y_train), (x_test, y_test) = fashion_mnist.load_data()
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
 x_train = x_train.astype('float32') / 255
@@ -46,7 +45,7 @@ x_test = x_test.astype('float32') / 255
 # 学習データの作成
 x_train_1 = []
 for i in range(len(x_train)):
-  if y_train[i] == 1: # スニーカーは７
+  if y_train[i] == 1:
      x_train_1.append(x_train[i].reshape((28, 28, 1)))
  
 x_train_1 = np.array(x_train_1)
@@ -58,7 +57,7 @@ print("train data:",len(x_train_1))
 # 評価データの作成
 x_test_1, x_test_9 = [], []
 for i in range(len(x_test)):
-  if y_test[i] == 1:  # スニーカーは７
+  if y_test[i] == 1:
      x_test_1.append(x_test[i].reshape((28, 28, 1)))
   if y_test[i] == 9:
      x_test_9.append(x_test[i].reshape((28, 28, 1)))
@@ -158,8 +157,6 @@ vae.fit(x_train_1,
         batch_size=batch_size)
         #validation_data=(x_test, None))
 vae.save_weights('vae_mlp_mnist.h5')
- 
-### 学習後の検出テスト ###
  
 #ヒートマップの計算
 def evaluate_img(model, x_normal, x_anomaly, name, height=8, width=8, move=2):  #######
